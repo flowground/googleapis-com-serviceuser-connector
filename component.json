@@ -1,0 +1,118 @@
+{
+    "title": "Service User",
+    "description": "Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use.",
+    "docsUrl": "https://cloud.google.com/service-management/",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/serviceuser/v1/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://serviceuser.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "serviceuser_services_search": {
+            "main": "./lib/actions/serviceuser_services_search.js",
+            "title": "Search available services.\n\nWhen no filter is specified, returns all accessible services. For\nauthenticated users, also returns all services the calling user has\n\"servicemanagement.services.bind\" permission for.",
+            "description": "Search available services.\n\nWhen no filter is specified, returns all accessible services. For\nauthenticated users, also returns all services the calling user has\n\"servicemanagement.services.bind\" permission for.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceuser_services_search.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceuser_projects_services_disable": {
+            "main": "./lib/actions/serviceuser_projects_services_disable.js",
+            "title": "Disable a service so it can no longer be used with a\nproject. This prevents unintended usage that may cause unexpected billing\ncharges or security leaks.\n\nOperation<response: google.protobuf.Empty>",
+            "description": "Disable a service so it can no longer be used with a\nproject. This prevents unintended usage that may cause unexpected billing\ncharges or security leaks.\n\nOperation<response: google.protobuf.Empty>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceuser_projects_services_disable.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceuser_projects_services_enable": {
+            "main": "./lib/actions/serviceuser_projects_services_enable.js",
+            "title": "Enable a service so it can be used with a project.\nSee [Cloud Auth Guide](https://cloud.google.com/docs/authentication) for\nmore information.\n\nOperation<response: google.protobuf.Empty>",
+            "description": "Enable a service so it can be used with a project.\nSee [Cloud Auth Guide](https://cloud.google.com/docs/authentication) for\nmore information.\n\nOperation<response: google.protobuf.Empty>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceuser_projects_services_enable.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "serviceuser_projects_services_list": {
+            "main": "./lib/actions/serviceuser_projects_services_list.js",
+            "title": "List enabled services for the specified consumer.",
+            "description": "List enabled services for the specified consumer.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/serviceuser_projects_services_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
